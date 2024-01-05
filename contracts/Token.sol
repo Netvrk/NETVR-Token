@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20BurnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20PausableUpgradeable.sol";
@@ -8,7 +9,7 @@ import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol"
 import "@openzeppelin/contracts-upgradeable/token/ERC20/extensions/ERC20PermitUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 
 contract Token is
     Initializable,
@@ -41,12 +42,12 @@ contract Token is
         address defaultAdmin,
         address pauser,
         address upgrader
-    ) public initializer {
-        __ERC20_init("Tokenz", "TKNZ");
+    ) external initializer {
+        __ERC20_init("Token", "TKN");
         __ERC20Burnable_init();
         __ERC20Pausable_init();
         __AccessControl_init();
-        __ERC20Permit_init("Tokenz");
+        __ERC20Permit_init("Token");
         __UUPSUpgradeable_init();
         __ReentrancyGuard_init();
 
@@ -57,11 +58,11 @@ contract Token is
         _mint(msg.sender, 100000000 * 10 ** decimals());
     }
 
-    function pause() public onlyRole(MANAGER_ROLE) {
+    function pause() external onlyRole(MANAGER_ROLE) {
         _pause();
     }
 
-    function unpause() public onlyRole(MANAGER_ROLE) {
+    function unpause() external onlyRole(MANAGER_ROLE) {
         _unpause();
     }
 
@@ -106,12 +107,12 @@ contract Token is
     ) internal override onlyRole(UPGRADER_ROLE) {}
 
     // The following functions are overrides required by Solidity.
-    function _update(
+    function _beforeTokenTransfer(
         address from,
         address to,
         uint256 value
     ) internal override(ERC20Upgradeable, ERC20PausableUpgradeable) {
-        super._update(from, to, value);
+        super._beforeTokenTransfer(from, to, value);
         require(!paused(), "TOKEN_PAUSED.");
         require(!isBlocked[from], "SENDER_BLOCKED");
         require(!isBlocked[to], "RECEIVER_BLOCKED");
