@@ -3,7 +3,7 @@ import { Signer } from "ethers";
 import { ethers, upgrades } from "hardhat";
 const { expect } = require("chai");
 
-describe("Root NFT Contracts test", function () {
+describe("Token test", function () {
   let token: any;
 
   let owner: Signer;
