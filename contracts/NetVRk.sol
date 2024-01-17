@@ -11,7 +11,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 
-contract Token is
+contract NetVRk is
     Initializable,
     ERC20Upgradeable,
     ERC20BurnableUpgradeable,
@@ -39,23 +39,23 @@ contract Token is
     }
 
     function initialize(
-        address defaultAdmin,
-        address pauser,
+        address owner,
+        address manager,
         address upgrader
     ) external initializer {
-        __ERC20_init("Token", "TKN");
+        __ERC20_init("NetVRk", "NETVR");
         __ERC20Burnable_init();
         __ERC20Pausable_init();
         __AccessControl_init();
-        __ERC20Permit_init("Token");
+        __ERC20Permit_init("NetVRk");
         __UUPSUpgradeable_init();
         __ReentrancyGuard_init();
 
-        _grantRole(DEFAULT_ADMIN_ROLE, defaultAdmin);
-        _grantRole(MANAGER_ROLE, pauser);
+        _grantRole(DEFAULT_ADMIN_ROLE, owner);
+        _grantRole(MANAGER_ROLE, manager);
         _grantRole(UPGRADER_ROLE, upgrader);
 
-        _mint(msg.sender, 100000000 * 10 ** decimals());
+        _mint(owner, 100000000 * 10 ** decimals());
     }
 
     function pause() external onlyRole(MANAGER_ROLE) {

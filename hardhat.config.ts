@@ -10,6 +10,10 @@ dotenv.config();
 const config: HardhatUserConfig = {
   solidity: "0.8.20",
   networks: {
+    mainnet: {
+      url: process.env.MAINNET_URL || "",
+      accounts: process.env.PRIVATE_KEY_1 !== undefined ? [process.env.PRIVATE_KEY_1] : [],
+    },
     goerli: {
       url: process.env.GOERLI_URL || "",
       accounts: process.env.PRIVATE_KEY_1 !== undefined ? [process.env.PRIVATE_KEY_1] : [],
@@ -22,9 +26,15 @@ const config: HardhatUserConfig = {
       url: process.env.BSC_URL || "",
       accounts: process.env.PRIVATE_KEY_1 !== undefined ? [process.env.PRIVATE_KEY_1] : [],
     },
+    polygon: {
+      url: process.env.POLYGON_URL || "",
+      accounts: process.env.PRIVATE_KEY_1 !== undefined ? [process.env.PRIVATE_KEY_1] : [],
+    },
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY || "",
+    apiKey: {
+      polygon: process.env.MATIC_API_KEY || "",
+    },
   },
 };
 

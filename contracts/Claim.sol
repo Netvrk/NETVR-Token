@@ -48,7 +48,6 @@ contract Claim is
 
         _grantRole(DEFAULT_ADMIN_ROLE, _defaultAdmin);
         _grantRole(MANAGER_ROLE, _manager);
-        _grantRole(MANAGER_ROLE, _manager);
 
         newToken = _newToken;
     }

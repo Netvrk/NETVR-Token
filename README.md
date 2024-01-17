@@ -1,5 +1,8 @@
-#### Token Test
+### Netvrk Token
 
-[0x143d074c6F079332376b54192275Fd39b93D1296](https://bscscan.com/address/0x143d074c6F079332376b54192275Fd39b93D1296)
+Netvrk: [0x52498F8d9791736f1D6398fE95ba3BD868114d10](https://etherscan.io/address/0x52498F8d9791736f1D6398fE95ba3BD868114d10)
+Netvrk (Polygon): [0x3558887f15b5b0074dC4167761DE14A6DFcb676e](https://polygonscan.com/address/0x3558887f15b5b0074dC4167761DE14A6DFcb676e)
 
-- 0x14D06C205dF4815d01d4e75ebE8b37da11F4f3e5
+### Netvrk Token claim
+
+Claim: [0x903bfa4323cC7b1AcEe9965E19662dc2E51cf50F](https://polygonscan.com/address/0x903bfa4323cC7b1AcEe9965E19662dc2E51cf50F)
